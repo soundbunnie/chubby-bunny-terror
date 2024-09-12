@@ -8,13 +8,18 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_1p81v")
-}, {
-"duration": 1.0,
 "texture": ExtResource("3_lga81")
 }],
 "loop": true,
-"name": &"default",
+"name": &"eat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1p81v")
+}],
+"loop": true,
+"name": &"idle",
 "speed": 5.0
 }]
 
@@ -26,6 +31,7 @@ script = ExtResource("1_rehct")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_h1xef")
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -5.5)
