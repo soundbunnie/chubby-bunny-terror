@@ -10,3 +10,6 @@ func spawn_carrot():
 	var x = rand.randf_range(0, screenSize.x)
 	carrot.position.x = x
 	add_child(carrot)
+	
+func _ready():
+	spawn_carrot()

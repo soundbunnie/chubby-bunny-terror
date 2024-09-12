@@ -1,8 +1,7 @@
 extends CharacterBody2D
 
-@export var fallSpeed = 200.0
-var gravity = 200.0
+@export var fallSpeed = 20.0
 
 func _physics_process(delta):
-	velocity.y += gravity * delta
+	velocity.y += fallSpeed
 	move_and_slide()
