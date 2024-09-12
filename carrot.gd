@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
-@export var fallSpeed = 20.0
+@export var fallSpeed = 1000.0
+
+var gravity = Vector2(0, fallSpeed)
 
 func _physics_process(delta):
-	velocity.y += fallSpeed
+	velocity += gravity * delta
+	#velocity.y += fallSpeed
 	move_and_slide()
 	
 	for i in get_slide_collision_count():
