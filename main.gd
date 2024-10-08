@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var spawnTimer = $CarrotSpawnTimer
+@export var spawnInterval = 1.0
 func spawn_carrot():
 	var carrotScene = load("res://carrot.tscn")
 	var screenSize = get_viewport().get_visible_rect().size
@@ -11,5 +13,11 @@ func spawn_carrot():
 	carrot.position.x = x
 	add_child(carrot)
 	
-func _ready():
+func _on_timer_timeout():
 	spawn_carrot()
+	
+func _ready():
+	spawnTimer.timeout.connect(_on_timer_timeout)
+	spawnTimer.wait_time = spawnInterval
+	spawnTimer.start()
+	

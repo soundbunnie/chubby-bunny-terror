@@ -8,3 +8,5 @@ script = ExtResource("1_r2rug")
 
 [node name="Player" parent="." instance=ExtResource("1_twwst")]
 position = Vector2(548, 566)
+
+[node name="CarrotSpawnTimer" type="Timer" parent="."]

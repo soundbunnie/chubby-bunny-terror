@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
+# 600 pixels / 5 seconds = 120 pixels/second
+# 120 pixels/second * 1/60 second/frame = 2 pixels/frame
 @export var fallSpeed = 1000.0
-
+# # Acceleration in pixels/sec/sec.
 var gravity = Vector2(0, fallSpeed)
 
 func _physics_process(delta):
