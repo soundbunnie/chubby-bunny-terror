@@ -24,7 +24,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qjyt"]
-size = Vector2(132, 171)
+size = Vector2(132, 114)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_rehct")
@@ -34,7 +34,7 @@ sprite_frames = SubResource("SpriteFrames_h1xef")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
-position = Vector2(-1, -5.5)
+position = Vector2(-1, 23)
 shape = SubResource("RectangleShape2D_3qjyt")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
