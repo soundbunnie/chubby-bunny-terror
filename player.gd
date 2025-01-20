@@ -5,3 +5,4 @@ func _ready():
 	
 func _physics_process(delta):
 	global_position.x = get_global_mouse_position().x
+	

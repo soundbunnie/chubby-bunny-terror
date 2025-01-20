@@ -1,9 +1,21 @@
 extends Node2D
 
 @onready var spawnTimer = $CarrotSpawnTimer
-@export var spawnInterval = 1.0
+@onready var scoreLabel = $ScoreLabel
+
+@export var spawnInterval = 0.5
+
+var carrotScene = load("res://carrot.tscn")
+
+var score = 0
+
+func _ready():
+	spawnTimer.timeout.connect(_on_timer_timeout)
+	SignalBus.add_point.connect(self._on_add_point)
+	spawnTimer.wait_time = spawnInterval
+	spawnTimer.start()
+
 func spawn_carrot():
-	var carrotScene = load("res://carrot.tscn")
 	var screenSize = get_viewport().get_visible_rect().size
 	var rand = RandomNumberGenerator.new()
 	# Spawn carrot at random position along x axis
@@ -15,9 +27,11 @@ func spawn_carrot():
 	
 func _on_timer_timeout():
 	spawn_carrot()
+
+func _on_add_point():
+	score += 1
+	print(score)
+	update_score_label()
 	
-func _ready():
-	spawnTimer.timeout.connect(_on_timer_timeout)
-	spawnTimer.wait_time = spawnInterval
-	spawnTimer.start()
-	
+func update_score_label():
+	scoreLabel.text = "Score: " + str(score)
