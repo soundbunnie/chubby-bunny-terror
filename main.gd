@@ -30,7 +30,6 @@ func _on_timer_timeout():
 
 func _on_add_point():
 	score += 1
-	print(score)
 	update_score_label()
 	
 func update_score_label():
