@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var spawnTimer = $CarrotSpawnTimer
 @onready var scoreLabel = $ScoreLabel
+@onready var speedLabel = $SpeedLabel
 
 @export var spawnInterval = 0.5
 
@@ -12,7 +13,8 @@ var score = 0
 func _ready():
 	spawnTimer.timeout.connect(_on_timer_timeout)
 	SignalBus.add_point.connect(self._on_add_point)
-	spawnTimer.wait_time = spawnInterval
+	update_speed_label()
+	update_timer(0)
 	spawnTimer.start()
 
 func spawn_carrot():
@@ -30,7 +32,19 @@ func _on_timer_timeout():
 
 func _on_add_point():
 	score += 1
+	if score % 10 == 0:
+		update_timer(0.02)
+		update_speed_label()
+		
 	update_score_label()
 	
 func update_score_label():
 	scoreLabel.text = "Score: " + str(score)
+	
+func update_speed_label():
+	speedLabel.text = "Speed: " + str(spawnInterval)
+	
+func update_timer(toAdd):
+	update_speed_label()
+	spawnInterval = spawnInterval - toAdd
+	spawnTimer.wait_time = spawnInterval
