@@ -34,13 +34,16 @@ func _on_timer_timeout():
 func _on_add_point(to_add):
 	score += to_add
 	if score % 10 == 0:
-		update_timer(0.02)
+		update_timer(-0.02)
 		update_speed_label()
 	update_score_label()
 	
 func _on_remove_point(to_remove):
 	if score > 0:
 		score -= to_remove
+		if score % 10 == 0:
+			update_timer(0.02)
+			update_speed_label()
 	update_score_label()
 	
 func update_score_label():
@@ -52,7 +55,7 @@ func animate_changed_points_label(to_add):
 func update_speed_label():
 	speedLabel.text = "Speed: " + str(spawnInterval)
 	
-func update_timer(time_to_add):
-	update_speed_label()
-	spawnInterval = spawnInterval - time_to_add
+func update_timer(time_to_change):
+	spawnInterval = spawnInterval + time_to_change
 	spawnTimer.wait_time = spawnInterval
+	update_speed_label()
