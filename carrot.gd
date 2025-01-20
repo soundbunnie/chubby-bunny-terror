@@ -13,4 +13,7 @@ func _physics_process(_delta):
 		var collider = collision.get_collider()
 		if collider.is_in_group("Player"):
 			queue_free()
-			SignalBus.add_point.emit(2)
+			SignalBus.add_point.emit(1)
+		elif collider.is_in_group("Floor"):
+			queue_free()
+			SignalBus.remove_point.emit(1)

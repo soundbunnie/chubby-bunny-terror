@@ -13,6 +13,7 @@ var score = 0
 func _ready():
 	spawnTimer.timeout.connect(_on_timer_timeout)
 	SignalBus.add_point.connect(_on_add_point)
+	SignalBus.remove_point.connect(_on_remove_point)
 	update_speed_label()
 	update_timer(0)
 	spawnTimer.start()
@@ -37,13 +38,21 @@ func _on_add_point(to_add):
 		update_speed_label()
 	update_score_label()
 	
+func _on_remove_point(to_remove):
+	if score > 0:
+		score -= to_remove
+	update_score_label()
+	
 func update_score_label():
 	scoreLabel.text = "Score: " + str(score)
+	
+func animate_changed_points_label(to_add):
+	pass
 	
 func update_speed_label():
 	speedLabel.text = "Speed: " + str(spawnInterval)
 	
-func update_timer(toAdd):
+func update_timer(time_to_add):
 	update_speed_label()
-	spawnInterval = spawnInterval - toAdd
+	spawnInterval = spawnInterval - time_to_add
 	spawnTimer.wait_time = spawnInterval

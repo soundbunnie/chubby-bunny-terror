@@ -1,18 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvaum1dklg2ra"]
+[gd_scene load_steps=7 format=3 uid="uid://bvaum1dklg2ra"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_r2rug"]
 [ext_resource type="PackedScene" uid="uid://h42kpwgjctfp" path="res://player.tscn" id="1_twwst"]
 [ext_resource type="PackedScene" uid="uid://qxfxh4kge7l4" path="res://carrot.tscn" id="3_d00te"]
 [ext_resource type="Script" path="res://SignalBus.gd" id="4_5eryb"]
+[ext_resource type="PackedScene" uid="uid://knyd2gxt4lmf" path="res://components/floating_text_component.tscn" id="5_7ljg8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_488cs"]
-size = Vector2(1144, 26)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vca0w"]
+size = Vector2(1464, 50)
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_r2rug")
 
 [node name="Player" parent="." instance=ExtResource("1_twwst")]
-position = Vector2(553, 567)
+position = Vector2(548, 566)
 
 [node name="CarrotSpawnTimer" type="Timer" parent="."]
 
@@ -38,10 +39,12 @@ position = Vector2(222, 84)
 [node name="SignalBus" type="Node" parent="."]
 script = ExtResource("4_5eryb")
 
-[node name="Floor" type="StaticBody2D" parent="." groups=["Floor"]]
+[node name="Floor" type="Area2D" parent="." groups=["Floor"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(576, 634)
-shape = SubResource("RectangleShape2D_488cs")
+position = Vector2(585, 659)
+shape = SubResource("RectangleShape2D_vca0w")
+
+[node name="FloatingTextComponent" parent="." instance=ExtResource("5_7ljg8")]
 
 [connection signal="add_point" from="SignalBus" to="." method="_on_signal_bus_add_point" unbinds=1]
