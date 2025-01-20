@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvaum1dklg2ra"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_r2rug"]
+[ext_resource type="PackedScene" uid="uid://h42kpwgjctfp" path="res://player.tscn" id="1_twwst"]
+[ext_resource type="PackedScene" uid="uid://qxfxh4kge7l4" path="res://carrot.tscn" id="3_d00te"]
+[ext_resource type="Script" path="res://SignalBus.gd" id="4_5eryb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_488cs"]
+size = Vector2(1144, 26)
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_r2rug")
+
+[node name="Player" parent="." instance=ExtResource("1_twwst")]
+position = Vector2(553, 567)
+
+[node name="CarrotSpawnTimer" type="Timer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 193.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Score: 0"
+
+[node name="SpeedLabel" type="Label" parent="."]
+offset_left = -1.0
+offset_top = 40.0
+offset_right = 192.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Speed: "
+
+[node name="Carrot" parent="." instance=ExtResource("3_d00te")]
+position = Vector2(222, 84)
+
+[node name="SignalBus" type="Node" parent="."]
+script = ExtResource("4_5eryb")
+
+[node name="Floor" type="StaticBody2D" parent="." groups=["Floor"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(576, 634)
+shape = SubResource("RectangleShape2D_488cs")
+
+[connection signal="add_point" from="SignalBus" to="." method="_on_signal_bus_add_point" unbinds=1]
