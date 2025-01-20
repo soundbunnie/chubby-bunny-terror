@@ -4,8 +4,8 @@ extends CharacterBody2D
 
 var gravity = Vector2(0, fallSpeed)
 
-func _physics_process(delta):
-	velocity += gravity * delta
+func _physics_process(_delta):
+	velocity += gravity * _delta
 	#velocity.y += fallSpeed
 	move_and_slide()
 	for i in get_slide_collision_count():
@@ -13,4 +13,4 @@ func _physics_process(delta):
 		var collider = collision.get_collider()
 		if collider.is_in_group("Player"):
 			queue_free()
-			SignalBus.add_point.emit()
+			SignalBus.add_point.emit(2)

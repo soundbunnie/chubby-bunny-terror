@@ -12,7 +12,7 @@ var score = 0
 
 func _ready():
 	spawnTimer.timeout.connect(_on_timer_timeout)
-	SignalBus.add_point.connect(self._on_add_point)
+	SignalBus.add_point.connect(_on_add_point)
 	update_speed_label()
 	update_timer(0)
 	spawnTimer.start()
@@ -30,12 +30,11 @@ func spawn_carrot():
 func _on_timer_timeout():
 	spawn_carrot()
 
-func _on_add_point():
-	score += 1
+func _on_add_point(to_add):
+	score += to_add
 	if score % 10 == 0:
 		update_timer(0.02)
 		update_speed_label()
-		
 	update_score_label()
 	
 func update_score_label():

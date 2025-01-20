@@ -43,5 +43,3 @@ script = ExtResource("4_5eryb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(585, 659)
 shape = SubResource("RectangleShape2D_vca0w")
-
-[connection signal="add_point" from="SignalBus" to="." method="_on_signal_bus_add_point" unbinds=1]

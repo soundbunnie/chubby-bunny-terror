@@ -1,3 +1,4 @@
 extends Node
 
-signal add_point
+signal add_point(to_add)
+
