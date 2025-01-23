@@ -127,3 +127,4 @@ offset_bottom = 372.0
 text = "Quit"
 
 [connection signal="add_point" from="SignalBus" to="." method="_on_signal_bus_add_point" unbinds=1]
+[connection signal="pressed" from="UI/PauseScreen/PauseMenu/Resume" to="UI" method="_on_resume_pressed"]
