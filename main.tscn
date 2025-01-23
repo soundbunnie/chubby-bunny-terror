@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvaum1dklg2ra"]
+[gd_scene load_steps=8 format=3 uid="uid://bvaum1dklg2ra"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_r2rug"]
 [ext_resource type="PackedScene" uid="uid://h42kpwgjctfp" path="res://player.tscn" id="1_twwst"]
 [ext_resource type="PackedScene" uid="uid://qxfxh4kge7l4" path="res://carrot.tscn" id="3_d00te"]
 [ext_resource type="Script" path="res://SignalBus.gd" id="4_5eryb"]
 [ext_resource type="Script" path="res://UI.gd" id="5_s7ioh"]
+[ext_resource type="Script" path="res://PauseScreen.gd" id="6_smea3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_488cs"]
 size = Vector2(1144, 26)
@@ -56,6 +57,7 @@ text = "Speed: "
 [node name="PauseScreen" type="CanvasLayer" parent="UI"]
 process_mode = 2
 visible = false
+script = ExtResource("6_smea3")
 
 [node name="PauseMenu" type="ColorRect" parent="UI/PauseScreen"]
 offset_left = 402.0
@@ -127,5 +129,5 @@ offset_bottom = 372.0
 text = "Quit"
 
 [connection signal="add_point" from="SignalBus" to="." method="_on_signal_bus_add_point" unbinds=1]
-[connection signal="pressed" from="UI/PauseScreen/PauseMenu/Resume" to="UI" method="_on_resume_pressed"]
-[connection signal="pressed" from="UI/PauseScreen/PauseMenu/Quit" to="UI" method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/PauseScreen/PauseMenu/Resume" to="UI/PauseScreen" method="_on_resume_pressed"]
+[connection signal="pressed" from="UI/PauseScreen/PauseMenu/Quit" to="UI/PauseScreen" method="_on_quit_pressed"]
