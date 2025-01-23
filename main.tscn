@@ -1,17 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvaum1dklg2ra"]
+[gd_scene load_steps=8 format=3 uid="uid://b0rvknrym248g"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_r2rug"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_q64y5"]
 [ext_resource type="PackedScene" uid="uid://h42kpwgjctfp" path="res://player.tscn" id="1_twwst"]
 [ext_resource type="PackedScene" uid="uid://qxfxh4kge7l4" path="res://carrot.tscn" id="3_d00te"]
-[ext_resource type="Script" path="res://SignalBus.gd" id="4_5eryb"]
-[ext_resource type="Script" path="res://UI.gd" id="5_s7ioh"]
-[ext_resource type="Script" path="res://PauseScreen.gd" id="6_smea3"]
+[ext_resource type="Script" path="res://scripts/SignalBus.gd" id="4_p4eye"]
+[ext_resource type="Script" path="res://scripts/UI/UI.gd" id="5_q6njc"]
+[ext_resource type="Script" path="res://scripts/UI/PauseScreen.gd" id="6_ldp1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_488cs"]
 size = Vector2(1144, 26)
 
 [node name="main" type="Node2D"]
-script = ExtResource("1_r2rug")
+script = ExtResource("1_q64y5")
 
 [node name="Player" parent="." instance=ExtResource("1_twwst")]
 position = Vector2(553, 567)
@@ -22,7 +22,7 @@ position = Vector2(553, 567)
 position = Vector2(222, 84)
 
 [node name="SignalBus" type="Node" parent="."]
-script = ExtResource("4_5eryb")
+script = ExtResource("4_p4eye")
 
 [node name="Floor" type="StaticBody2D" parent="." groups=["Floor"]]
 
@@ -36,9 +36,10 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("5_s7ioh")
+script = ExtResource("5_q6njc")
 
 [node name="ScoreLabel" type="Label" parent="UI"]
+layout_mode = 0
 offset_right = 193.0
 offset_bottom = 48.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -46,6 +47,7 @@ theme_override_font_sizes/font_size = 32
 text = "Score: 0"
 
 [node name="SpeedLabel" type="Label" parent="UI"]
+layout_mode = 0
 offset_left = -1.0
 offset_top = 40.0
 offset_right = 192.0
@@ -57,7 +59,7 @@ text = "Speed: "
 [node name="PauseScreen" type="CanvasLayer" parent="UI"]
 process_mode = 2
 visible = false
-script = ExtResource("6_smea3")
+script = ExtResource("6_ldp1t")
 
 [node name="PauseMenu" type="ColorRect" parent="UI/PauseScreen"]
 offset_left = 402.0
@@ -103,7 +105,7 @@ offset_top = 25.0
 offset_right = 259.0
 offset_bottom = 75.0
 
-[node name="Label" type="Label" parent="UI/PauseScreen/PauseMenu/VolumeSlider"]
+[node name="VolumeLabel" type="Label" parent="UI/PauseScreen/PauseMenu/VolumeSlider"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
