@@ -2,12 +2,26 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 
+var mouse_pos
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	process_mode = Node.PROCESS_MODE_INHERIT
 	SignalBus.add_point.connect(eat_carrot.unbind(1))
+	SignalBus.pause_game.connect(pause_player)
+	SignalBus.unpause_game.connect(unpause_player)
 	
-func _physics_process(_delta):
-	global_position.x = get_global_mouse_position().x
+func _unhandled_input(event):
+	if(event is InputEventMouseMotion):
+		global_position.x = get_viewport().get_mouse_position().x
+	
+func pause_player():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	mouse_pos = get_viewport().get_mouse_position()
+
+func unpause_player():
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	Input.warp_mouse(mouse_pos)
 	
 func eat_carrot():
 	animated_sprite.play("eat")

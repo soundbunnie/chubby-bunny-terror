@@ -29,12 +29,7 @@ script = ExtResource("4_5eryb")
 position = Vector2(576, 634)
 shape = SubResource("RectangleShape2D_488cs")
 
-[node name="UI" type="Control" parent="."]
-process_mode = 3
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UI" type="Node" parent="."]
 script = ExtResource("5_s7ioh")
 
 [node name="ScoreLabel" type="Label" parent="UI"]

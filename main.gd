@@ -3,9 +3,12 @@ extends Node2D
 @onready var spawnTimer = $CarrotSpawnTimer
 @onready var scoreLabel = $UI/ScoreLabel
 @onready var speedLabel = $UI/SpeedLabel
+@onready var pauseScreen = $UI/PauseScreen
 
 @export var spawnInterval = 0.5
 @export var points_to_progress = 10
+
+var paused = false
 
 var speedMultiplierText = 1
 var speedMultiplier = 0.02
@@ -18,9 +21,23 @@ func _ready():
 	spawnTimer.timeout.connect(_on_timer_timeout)
 	SignalBus.add_point.connect(_on_add_point)
 	SignalBus.remove_point.connect(_on_remove_point)
+	#SignalBus.pause_game.connect(pause_main)
 	update_speed_label()
 	update_timer(0, "adding")
 	spawnTimer.start()
+	
+#func pause_main():
+#	if !pauseScreen.visible:
+	#	get_tree().paused = true
+	#	pauseScreen.visible = true
+	#	set_physics_process(false)
+	#	paused = true
+#	elif pauseScreen.visible:
+	#	get_tree().paused = false
+	#	pauseScreen.visible = false
+	#	set_physics_process(true)
+	#	paused = false
+	#	print("unpaused")
 
 func spawn_carrot():
 	var screenSize = get_viewport().get_visible_rect().size
