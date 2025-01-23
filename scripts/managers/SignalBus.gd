@@ -7,3 +7,5 @@ signal remove_point(to_remove)
 signal pause_game
 
 signal unpause_game
+
+signal change_music(path)

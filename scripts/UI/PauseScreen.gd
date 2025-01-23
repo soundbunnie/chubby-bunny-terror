@@ -4,7 +4,7 @@ extends CanvasLayer
 
 @onready var volumeSlider = $PauseMenu/VolumeSlider
 @onready var volumeLabel = $PauseMenu/VolumeSlider/VolumeLabel
-@onready var volumeInput = $"PauseMenu/VolumeSlider/Volume input"
+@onready var volumeInput = $"PauseMenu/VolumeSlider/VolumeInput"
 
 @onready var LineEditRegEx = RegEx.new()
 
@@ -52,7 +52,6 @@ func _on_volume_input_text_changed(new_text):
 	else:
 		volumeInput.text = old_text
 		volumeInput.set_caret_column(volumeInput.text.length())
-
 
 func _on_volume_slider_value_changed(value):
 	volumeInput.placeholder_text = (str(volumeSlider.value))
