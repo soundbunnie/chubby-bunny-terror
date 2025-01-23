@@ -8,6 +8,7 @@ var paused_position = 0.0
 
 func _ready():
 	SignalBus.change_music.connect(play_music)
+	SignalBus.change_volume.connect(change_volume)
 	
 func play_music(mus_name):
 	for i in music_array.size():
@@ -17,3 +18,6 @@ func play_music(mus_name):
 			musicPlayer.stream = song
 			musicPlayer.play(paused_position)
 			paused_position = 0.0
+
+func change_volume(num):
+	musicPlayer.volume_db = linear_to_db(num)

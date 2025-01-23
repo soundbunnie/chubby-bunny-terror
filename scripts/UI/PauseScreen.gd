@@ -54,4 +54,5 @@ func _on_volume_input_text_changed(new_text):
 		volumeInput.set_caret_column(volumeInput.text.length())
 
 func _on_volume_slider_value_changed(value):
+	SignalBus.change_volume.emit(value)
 	volumeInput.placeholder_text = (str(volumeSlider.value))

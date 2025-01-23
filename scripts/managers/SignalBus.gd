@@ -9,3 +9,5 @@ signal pause_game
 signal unpause_game
 
 signal change_music(path)
+
+signal change_volume(num)
