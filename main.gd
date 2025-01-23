@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var spawnTimer = $CarrotSpawnTimer
-@onready var scoreLabel = $ScoreLabel
-@onready var speedLabel = $SpeedLabel
+@onready var scoreLabel = $UI/ScoreLabel
+@onready var speedLabel = $UI/SpeedLabel
 
 @export var spawnInterval = 0.5
 @export var points_to_progress = 10
@@ -38,16 +38,18 @@ func _on_timer_timeout():
 func _on_add_point(to_add):
 	score += to_add
 	if score % points_to_progress == 0:
-		update_timer(speedMultiplier, "adding")
-		update_speed_label()
+		#update_timer(speedMultiplier, "adding")
+		#update_speed_label()
+		pass
 	update_score_label()
 	
 func _on_remove_point(to_remove):
 	if score > 0:
 		score -= to_remove
 		if score % points_to_progress == 0:
-			update_timer(speedMultiplier, "removing")
-			update_speed_label()
+			#update_timer(speedMultiplier, "removing")
+			#update_speed_label()
+			pass
 	update_score_label()
 	
 func update_score_label():

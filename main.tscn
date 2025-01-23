@@ -16,22 +16,6 @@ position = Vector2(553, 567)
 
 [node name="CarrotSpawnTimer" type="Timer" parent="."]
 
-[node name="ScoreLabel" type="Label" parent="."]
-offset_right = 193.0
-offset_bottom = 48.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Score: 0"
-
-[node name="SpeedLabel" type="Label" parent="."]
-offset_left = -1.0
-offset_top = 40.0
-offset_right = 192.0
-offset_bottom = 88.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Speed: "
-
 [node name="Carrot" parent="." instance=ExtResource("3_d00te")]
 position = Vector2(222, 84)
 
@@ -43,5 +27,94 @@ script = ExtResource("4_5eryb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(576, 634)
 shape = SubResource("RectangleShape2D_488cs")
+
+[node name="UI" type="Node" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+offset_right = 193.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Score: 0"
+
+[node name="SpeedLabel" type="Label" parent="UI"]
+offset_left = -1.0
+offset_top = 40.0
+offset_right = 192.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Speed: "
+
+[node name="PauseScreen" type="CanvasLayer" parent="UI"]
+
+[node name="PauseMenu" type="ColorRect" parent="UI/PauseScreen"]
+offset_left = 402.0
+offset_top = 79.0
+offset_right = 728.0
+offset_bottom = 474.0
+color = Color(1, 0.858824, 1, 1)
+
+[node name="Resume" type="Button" parent="UI/PauseScreen/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -64.5
+offset_right = 90.0
+offset_bottom = -29.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+
+[node name="Save" type="Button" parent="UI/PauseScreen/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = 2.5
+offset_right = 91.0
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Save"
+
+[node name="VolumeSlider" type="HSlider" parent="UI/PauseScreen/PauseMenu"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 25.0
+offset_right = 259.0
+offset_bottom = 75.0
+
+[node name="Label" type="Label" parent="UI/PauseScreen/PauseMenu/VolumeSlider"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -45.0
+offset_right = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="Quit" type="Button" parent="UI/PauseScreen/PauseMenu"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 337.0
+offset_right = 225.0
+offset_bottom = 372.0
+text = "Quit"
 
 [connection signal="add_point" from="SignalBus" to="." method="_on_signal_bus_add_point" unbinds=1]
