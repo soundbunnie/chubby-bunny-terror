@@ -25,19 +25,6 @@ func _ready():
 	update_speed_label()
 	update_timer(0, "adding")
 	spawnTimer.start()
-	
-#func pause_main():
-#	if !pauseScreen.visible:
-	#	get_tree().paused = true
-	#	pauseScreen.visible = true
-	#	set_physics_process(false)
-	#	paused = true
-#	elif pauseScreen.visible:
-	#	get_tree().paused = false
-	#	pauseScreen.visible = false
-	#	set_physics_process(true)
-	#	paused = false
-	#	print("unpaused")
 
 func spawn_carrot():
 	var screenSize = get_viewport().get_visible_rect().size
