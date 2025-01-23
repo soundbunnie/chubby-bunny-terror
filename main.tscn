@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://diqiujq5mok75"]
+[gd_scene load_steps=12 format=3 uid="uid://diqiujq5mok75"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_q64y5"]
 [ext_resource type="PackedScene" uid="uid://h42kpwgjctfp" path="res://player.tscn" id="1_twwst"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cipqmujd2yyta" path="res://assets/music/shop theme wip.wav" id="3_bvsmn"]
 [ext_resource type="PackedScene" uid="uid://qxfxh4kge7l4" path="res://carrot.tscn" id="3_d00te"]
 [ext_resource type="Script" path="res://scripts/managers/SignalBus.gd" id="4_60h0a"]
+[ext_resource type="AudioStream" uid="uid://dd7wsj0ftmue0" path="res://assets/music/Theme of Miranda.wav" id="4_s1uch"]
 [ext_resource type="Script" path="res://scripts/UI/UI.gd" id="5_q6njc"]
 [ext_resource type="Script" path="res://scripts/UI/PauseScreen.gd" id="6_ldp1t"]
 
@@ -18,7 +19,7 @@ script = ExtResource("1_q64y5")
 
 [node name="AudioManager" type="Node" parent="."]
 script = ExtResource("2_ic1xr")
-music_array = Array[Resource]([ExtResource("3_bvsmn")])
+music_array = Array[Resource]([ExtResource("3_bvsmn"), ExtResource("4_s1uch")])
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="AudioManager"]
 
