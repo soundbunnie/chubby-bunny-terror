@@ -63,17 +63,6 @@ theme_override_font_sizes/font_size = 32
 text = "Score: 0"
 metadata/_edit_use_anchors_ = true
 
-[node name="SpeedLabel" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 40.0
-offset_right = 192.0
-offset_bottom = 88.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Speed: "
-metadata/_edit_use_anchors_ = true
-
 [node name="PauseScreen" type="CanvasLayer" parent="UI"]
 process_mode = 2
 visible = false

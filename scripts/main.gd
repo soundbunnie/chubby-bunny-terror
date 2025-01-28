@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var spawnTimer = $CarrotSpawnTimer
 @onready var scoreLabel = $UI/ScoreLabel
-@onready var speedLabel = $UI/SpeedLabel
 @onready var pauseScreen = $UI/PauseScreen
 
 @export var spawnInterval = 0.5
@@ -23,7 +22,6 @@ func _ready():
 	SignalBus.remove_point.connect(_on_remove_point)
 	SignalBus.pause_game.connect(pause_main)
 	SignalBus.unpause_game.connect(unpause_main)
-	update_speed_label()
 	update_timer(0, "adding")
 	spawnTimer.start()
 	
@@ -34,7 +32,6 @@ func _notification(what):
 		NOTIFICATION_WM_WINDOW_FOCUS_IN:
 			SignalBus.unpause_game.emit()
 			
-
 func pause_main():
 	get_tree().paused = true
 	
@@ -57,8 +54,6 @@ func _on_timer_timeout():
 func _on_add_point(to_add):
 	score += to_add
 	if score % points_to_progress == 0:
-		#update_timer(speedMultiplier, "adding")
-		#update_speed_label()
 		pass
 	update_score_label()
 	
@@ -66,16 +61,11 @@ func _on_remove_point(to_remove):
 	if score > 0:
 		score -= to_remove
 		if score % points_to_progress == 0:
-			#update_timer(speedMultiplier, "removing")
-			#update_speed_label()
 			pass
 	update_score_label()
 	
 func update_score_label():
 	scoreLabel.text = "Score: " + str(score)
-	
-func update_speed_label():
-	speedLabel.text = "Speed: " + str(speedMultiplierText)
 	
 func update_timer(time_to_change, modifier):
 	if modifier == "adding":
@@ -88,4 +78,3 @@ func update_timer(time_to_change, modifier):
 	spawnInterval = snapped(spawnInterval, 0.01)
 	speedMultiplierText = snapped(speedMultiplierText, 0.01)
 	spawnTimer.wait_time = spawnInterval
-	update_speed_label()
