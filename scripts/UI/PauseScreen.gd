@@ -18,12 +18,10 @@ func _ready():
 
 func pause():
 	if !paused:
-		get_tree().paused = true
 		paused = true
 		show()
 		SignalBus.pause_game.emit()
 	elif paused:
-		get_tree().paused = false
 		paused = false
 		quitConfirm = false
 		quitButton.set_text("Quit")

@@ -18,12 +18,14 @@ size = Vector2(1144, 26)
 script = ExtResource("1_q64y5")
 
 [node name="AudioManager" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("2_ic1xr")
 music_array = Array[Resource]([ExtResource("3_bvsmn"), ExtResource("4_s1uch")])
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="AudioManager"]
 
 [node name="MusicManager" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("2_dwf4t")
 
 [node name="SignalBus" type="Node" parent="."]
@@ -50,6 +52,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_q6njc")
+metadata/_edit_use_anchors_ = true
 
 [node name="ScoreLabel" type="Label" parent="UI"]
 layout_mode = 0
@@ -58,6 +61,7 @@ offset_bottom = 48.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Score: 0"
+metadata/_edit_use_anchors_ = true
 
 [node name="SpeedLabel" type="Label" parent="UI"]
 layout_mode = 0
@@ -68,6 +72,7 @@ offset_bottom = 88.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Speed: "
+metadata/_edit_use_anchors_ = true
 
 [node name="PauseScreen" type="CanvasLayer" parent="UI"]
 process_mode = 2

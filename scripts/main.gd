@@ -21,10 +21,25 @@ func _ready():
 	spawnTimer.timeout.connect(_on_timer_timeout)
 	SignalBus.add_point.connect(_on_add_point)
 	SignalBus.remove_point.connect(_on_remove_point)
-	#SignalBus.pause_game.connect(pause_main)
+	SignalBus.pause_game.connect(pause_main)
+	SignalBus.unpause_game.connect(unpause_main)
 	update_speed_label()
 	update_timer(0, "adding")
 	spawnTimer.start()
+	
+func _notification(what):
+	match what:
+		NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+			SignalBus.pause_game.emit()
+		NOTIFICATION_WM_WINDOW_FOCUS_IN:
+			SignalBus.unpause_game.emit()
+			
+
+func pause_main():
+	get_tree().paused = true
+	
+func unpause_main():
+	get_tree().paused = false
 
 func spawn_carrot():
 	var screenSize = get_viewport().get_visible_rect().size
