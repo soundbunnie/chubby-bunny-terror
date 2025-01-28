@@ -6,8 +6,7 @@ extends Node
 
 var pauseMusic = "Theme of Miranda"
 
-var tabbedOut = false
-
+var tabbedOut
 var currentSong
 
 var pausedPosition = 0.0
@@ -15,8 +14,8 @@ var pausedPosition = 0.0
 func _ready():
 	SignalBus.change_music.connect(play_music)
 	SignalBus.change_volume.connect(change_volume)
-	SignalBus.pause_game.connect(pause_music)
-	SignalBus.unpause_game.connect(unpause_music)
+	SignalBus.pause_music.connect(pause_music)
+	SignalBus.unpause_music.connect(unpause_music)
 	
 func _notification(what):
 	match what:
@@ -47,6 +46,7 @@ func change_volume(num):
 	musicPlayer.volume_db = linear_to_db(num)
 
 func pause_music():
+	print(tabbedOut)
 	pausedPosition = musicPlayer.get_playback_position()
 	if tabbedOut:
 		musicPlayer.stop()

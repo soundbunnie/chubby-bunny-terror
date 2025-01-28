@@ -8,8 +8,8 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	process_mode = Node.PROCESS_MODE_INHERIT
 	SignalBus.add_point.connect(eat_carrot.unbind(1))
-	SignalBus.pause_game.connect(pause_player)
-	SignalBus.unpause_game.connect(unpause_player)
+	SignalBus.pause_player.connect(pause_player)
+	SignalBus.unpause_player.connect(unpause_player)
 	
 func _unhandled_input(event):
 	if(event is InputEventMouseMotion):

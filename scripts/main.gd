@@ -13,7 +13,7 @@ var speedMultiplierText = 1
 var speedMultiplier = 0.02
 
 var carrotScene = load("res://carrot.tscn")
-#
+
 var score = 0
 
 func _ready():
@@ -33,10 +33,17 @@ func _notification(what):
 			SignalBus.unpause_game.emit()
 			
 func pause_main():
+	SignalBus.pause_music.emit()
+	SignalBus.pause_player.emit()
 	get_tree().paused = true
+	paused = true
 	
 func unpause_main():
-	get_tree().paused = false
+	if !pauseScreen.visible:
+		SignalBus.unpause_music.emit()
+		SignalBus.unpause_player.emit()
+		get_tree().paused = false
+		paused = false
 
 func spawn_carrot():
 	var screenSize = get_viewport().get_visible_rect().size
