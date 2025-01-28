@@ -13,7 +13,7 @@ var speedMultiplierText = 1
 var speedMultiplier = 0.02
 
 var carrotScene = load("res://carrot.tscn")
-
+#
 var score = 0
 
 func _ready():
