@@ -85,3 +85,5 @@ func update_timer(time_to_change, modifier):
 	spawnInterval = snapped(spawnInterval, 0.01)
 	speedMultiplierText = snapped(speedMultiplierText, 0.01)
 	spawnTimer.wait_time = spawnInterval
+
+#
