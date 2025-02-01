@@ -10,7 +10,6 @@ extends Node2D
 var paused = false
 
 var speedMultiplierText = 1
-var speedMultiplier = 0.02
 
 var carrotScene = load("res://carrot.tscn")
 

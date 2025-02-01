@@ -1,11 +1,9 @@
 extends CharacterBody2D
 
-@export var fallSpeed = 1000
-
-var gravity = Vector2(0, fallSpeed)
+@export var speed = 1000
 
 func _physics_process(delta):
-	global_position += Vector2(0, (fallSpeed) * delta)
+	velocity = Vector2(0, speed)
 	move_and_slide()
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -16,4 +14,3 @@ func _physics_process(delta):
 		elif collider.is_in_group("Floor"):
 			queue_free()
 			SignalBus.remove_point.emit(1)
-
