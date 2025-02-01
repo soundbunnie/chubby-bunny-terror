@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float = 1000
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = Vector2(0, speed)
 	move_and_slide()
 	for i in get_slide_collision_count():

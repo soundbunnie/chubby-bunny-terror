@@ -33,7 +33,6 @@ func _notification(what):
 			
 func pause_main():
 	SignalBus.pause_music.emit()
-	SignalBus.pause_player.emit()
 	get_tree().paused = true
 	paused = true
 	
@@ -41,7 +40,6 @@ func unpause_main():
 	if !pauseScreen.visible:
 		print("pause screen not visible")
 		SignalBus.unpause_music.emit()
-		SignalBus.unpause_player.emit()
 		get_tree().paused = false
 		paused = false
 
@@ -85,5 +83,3 @@ func update_timer(time_to_change, modifier):
 	spawnInterval = snapped(spawnInterval, 0.01)
 	speedMultiplierText = snapped(speedMultiplierText, 0.01)
 	spawnTimer.wait_time = spawnInterval
-
-#

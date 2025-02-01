@@ -38,7 +38,7 @@ func _on_quit_pressed():
 	elif quitConfirm:
 		get_tree().quit()
 
-func _on_volume_input_text_submitted(new_text):
+func _on_volume_input_text_submitted(_new_text):
 	volumeInput.release_focus()
 	volumeInput.text = ""
 
