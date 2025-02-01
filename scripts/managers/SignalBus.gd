@@ -12,10 +12,6 @@ signal pause_music
 
 signal unpause_music
 
-signal pause_player
-
-signal unpause_player
-
 signal change_music(path)
 
 signal change_volume(num)

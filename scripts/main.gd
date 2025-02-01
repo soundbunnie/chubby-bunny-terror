@@ -4,16 +4,16 @@ extends Node2D
 @onready var scoreLabel = $UI/ScoreLabel
 @onready var pauseScreen = $UI/PauseScreen
 
-@export var spawnInterval = 0.5
-@export var points_to_progress = 10
+@export var spawnInterval:float = 0.5
+@export var points_to_progress:int = 10
 
-var paused = false
+var paused:bool = false
 
-var speedMultiplierText = 1
+var speedMultiplierText:int = 1
 
 var carrotScene = load("res://carrot.tscn")
 
-var score = 0
+var score:int = 0
 
 func _ready():
 	spawnTimer.timeout.connect(_on_timer_timeout)
@@ -33,7 +33,6 @@ func _notification(what):
 			
 func pause_main():
 	SignalBus.pause_music.emit()
-	SignalBus.pause_player.emit()
 	get_tree().paused = true
 	paused = true
 	
@@ -41,7 +40,6 @@ func unpause_main():
 	if !pauseScreen.visible:
 		print("pause screen not visible")
 		SignalBus.unpause_music.emit()
-		SignalBus.unpause_player.emit()
 		get_tree().paused = false
 		paused = false
 
@@ -85,5 +83,3 @@ func update_timer(time_to_change, modifier):
 	spawnInterval = snapped(spawnInterval, 0.01)
 	speedMultiplierText = snapped(speedMultiplierText, 0.01)
 	spawnTimer.wait_time = spawnInterval
-
-#
