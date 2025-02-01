@@ -27,9 +27,9 @@ func _notification(what):
 func play_music(mus_name):
 	for i in music_array.size():
 		var song = music_array[i]
-		var name = song.resource_path.get_file().get_basename()
-		if name == mus_name:
-			currentSong = name
+		var song_arr_name = song.resource_path.get_file().get_basename()
+		if song_arr_name == mus_name:
+			currentSong = song_arr_name
 			musicPlayer.stream = song
 			musicPlayer.play(pausedPosition)
 			pausedPosition = 0.0
@@ -37,8 +37,8 @@ func play_music(mus_name):
 func play_pause_music():
 	for i in music_array.size():
 		var song = music_array[i]
-		var name = song.resource_path.get_file().get_basename()
-		if name == pauseMusic:
+		var song_arr_name = song.resource_path.get_file().get_basename()
+		if song_arr_name == pauseMusic:
 			musicPlayer.stream = song
 			musicPlayer.play(0.0)
 
