@@ -40,6 +40,7 @@ func pause_main():
 	
 func unpause_main():
 	if !pauseScreen.visible:
+		print("pause screen not visible")
 		SignalBus.unpause_music.emit()
 		SignalBus.unpause_player.emit()
 		get_tree().paused = false
