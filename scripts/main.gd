@@ -10,7 +10,6 @@ extends Node2D
 var paused = false
 
 var speedMultiplierText = 1
-var speedMultiplier = 0.02
 
 var carrotScene = load("res://carrot.tscn")
 
@@ -40,6 +39,7 @@ func pause_main():
 	
 func unpause_main():
 	if !pauseScreen.visible:
+		print("pause screen not visible")
 		SignalBus.unpause_music.emit()
 		SignalBus.unpause_player.emit()
 		get_tree().paused = false
