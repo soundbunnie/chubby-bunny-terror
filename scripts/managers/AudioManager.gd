@@ -4,12 +4,12 @@ extends Node
 @onready var musicPlayer = $MusicPlayer
 @onready var stream = AudioStreamPlayer.new()
 
-var pauseMusic = "Theme of Miranda"
+var pauseMusic:String = "Theme of Miranda"
 
-var tabbedOut
-var currentSong
+var tabbedOut:bool
+var currentSong:String
 
-var pausedPosition = 0.0
+var pausedPosition:float = 0.0
 
 func _ready():
 	SignalBus.change_music.connect(play_music)

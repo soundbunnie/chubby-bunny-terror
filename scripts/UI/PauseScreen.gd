@@ -6,11 +6,11 @@ extends CanvasLayer
 @onready var volumeLabel = $PauseMenu/VolumeSlider/VolumeLabel
 @onready var volumeInput = $"PauseMenu/VolumeSlider/VolumeInput"
 
-@onready var LineEditRegEx = RegEx.new()
+@onready var LineEditRegEx := RegEx.new()
 
-var paused = false
+var paused:bool = false
 
-var quitConfirm = false
+var quitConfirm:bool = false
 
 func _ready():
 	LineEditRegEx.compile("^[0-9.]*$")

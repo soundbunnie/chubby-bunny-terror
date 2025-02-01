@@ -4,9 +4,9 @@ extends Control
 
 @onready var quitButton = $PauseScreen/PauseMenu/Quit
 
-var paused = false
+var paused:bool = false
 
-var quitConfirm = false
+var quitConfirm:bool = false
 
 func _input(event):
 	if event.is_action_pressed("ui_pause"):
