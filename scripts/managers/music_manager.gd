@@ -1,8 +1,10 @@
 extends Node
 
+# @export variables
 @onready var shop_theme_mus = "shop theme wip"
 @onready var theme_of_miranda = "Theme of Miranda"
 
+# private variables
 var current_mus:String
 
 func _ready():
