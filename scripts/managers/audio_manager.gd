@@ -1,57 +1,60 @@
 extends Node
+
+# @export variables
 @export var music_array: Array[Resource]
 
-@onready var musicPlayer = $MusicPlayer
+# private variables
+var pause_music:String = "Theme of Miranda"
+var current_song:String
+var tabbed_out:bool
+var paused_position:float = 0.0
+
+# @onready variables
+@onready var music_player = $MusicPlayer
 @onready var stream = AudioStreamPlayer.new()
 
-var pauseMusic:String = "Theme of Miranda"
-
-var tabbedOut:bool
-var currentSong:String
-
-var pausedPosition:float = 0.0
-
 func _ready():
-	SignalBus.change_music.connect(play_music)
-	SignalBus.change_volume.connect(change_volume)
-	SignalBus.pause_music.connect(pause_music)
-	SignalBus.unpause_music.connect(unpause_music)
+	# connect signals
+	SignalBus.change_music.connect(_on_music_changed)
+	SignalBus.change_volume.connect(_on_volume_changed)
+	SignalBus.pause_music.connect(_on_music_paused)
+	SignalBus.unpause_music.connect(_on_music_unpaused)
 	
 func _notification(what):
 	match what:
 		NOTIFICATION_WM_WINDOW_FOCUS_OUT:
-			tabbedOut = true
+			tabbed_out = true
 		NOTIFICATION_WM_WINDOW_FOCUS_IN:
-			tabbedOut = false
+			tabbed_out = false
 	
-func play_music(mus_name):
+func _on_music_changed(mus_name):
 	for i in music_array.size():
 		var song = music_array[i]
 		var song_arr_name = song.resource_path.get_file().get_basename()
 		if song_arr_name == mus_name:
-			currentSong = song_arr_name
-			musicPlayer.stream = song
-			musicPlayer.play(pausedPosition)
-			pausedPosition = 0.0
+			current_song = song_arr_name
+			music_player.stream = song
+			music_player.play(paused_position)
+			paused_position = 0.0
+
+func _on_volume_changed(num):
+	music_player.volume_db = linear_to_db(num)
+
+func _on_music_paused():
+	print(tabbed_out)
+	paused_position = music_player.get_playback_position()
+	if tabbed_out:
+		music_player.stop()
+	elif !tabbed_out:
+		play_pause_music()
+	
+func _on_music_unpaused():
+	_on_music_changed(current_song)
 
 func play_pause_music():
 	for i in music_array.size():
 		var song = music_array[i]
 		var song_arr_name = song.resource_path.get_file().get_basename()
-		if song_arr_name == pauseMusic:
-			musicPlayer.stream = song
-			musicPlayer.play(0.0)
-
-func change_volume(num):
-	musicPlayer.volume_db = linear_to_db(num)
-
-func pause_music():
-	print(tabbedOut)
-	pausedPosition = musicPlayer.get_playback_position()
-	if tabbedOut:
-		musicPlayer.stop()
-	elif !tabbedOut:
-		play_pause_music()
-	
-func unpause_music():
-	play_music(currentSong)
+		if song_arr_name == pause_music:
+			music_player.stream = song
+			music_player.play(0.0)
