@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+# @export variables
 @export var speed: float = 1000
 
 func _physics_process(_delta):
