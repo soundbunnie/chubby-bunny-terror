@@ -1,26 +1,31 @@
 extends Node2D
 
-@onready var spawnTimer = $CarrotSpawnTimer
-@onready var scoreLabel = $UI/ScoreLabel
-@onready var pauseScreen = $UI/PauseScreen
-
-@export var spawnInterval:float = 0.3
+# @export variables
+@export var spawn_interval:float = 0.3
 @export var points_to_progress:int = 10
 
+# reference variables
+var carrot_scene = load("res://carrot.tscn")
+
+# private variables
 var paused:bool = false
-
-var carrotScene = load("res://carrot.tscn")
-
 var score:int = 0
 
+# @onready variables
+@onready var spawn_timer = $CarrotSpawnTimer
+@onready var score_label = $UI/ScoreLabel
+@onready var pause_screen = $UI/PauseScreen
+
 func _ready():
-	spawnTimer.timeout.connect(_on_timer_timeout)
-	SignalBus.add_point.connect(_on_add_point)
-	SignalBus.remove_point.connect(_on_remove_point)
-	SignalBus.pause_game.connect(pause_main)
-	SignalBus.unpause_game.connect(unpause_main)
-	spawnTimer.wait_time = spawnInterval
-	spawnTimer.start()
+	# connecting signals
+	spawn_timer.timeout.connect(_on_timer_timeout)
+	SignalBus.add_point.connect(_on_point_added)
+	SignalBus.remove_point.connect(_on_point_removed)
+	SignalBus.pause_game.connect(_on_game_paused)
+	SignalBus.unpause_game.connect(_on_game_unpaused)
+	
+	spawn_timer.wait_time = spawn_interval
+	spawn_timer.start()
 	
 func _notification(what):
 	match what:
@@ -29,44 +34,44 @@ func _notification(what):
 		NOTIFICATION_WM_WINDOW_FOCUS_IN:
 			SignalBus.unpause_game.emit()
 			
-func pause_main():
+func _on_game_paused():
 	SignalBus.pause_music.emit()
 	get_tree().paused = true
 	paused = true
 	
-func unpause_main():
-	if !pauseScreen.visible:
+func _on_game_unpaused():
+	if !pause_screen.visible:
 		print("pause screen not visible")
 		SignalBus.unpause_music.emit()
 		get_tree().paused = false
 		paused = false
-
-func spawn_carrot():
-	var screenSize = get_viewport().get_visible_rect().size
-	var rand = RandomNumberGenerator.new()
-	# Spawn carrot at random position along x axis
-	var carrot = carrotScene.instantiate()
-	rand.randomize()
-	var x = rand.randf_range(0, screenSize.x)
-	carrot.position.x = x
-	add_child(carrot)
-	
+		
 func _on_timer_timeout():
 	spawn_carrot()
 
-func _on_add_point(to_add):
+func _on_point_added(to_add):
 	score += to_add
 	if score % points_to_progress == 0:
 		pass
 	update_score_label()
 	
-func _on_remove_point(to_remove):
+func _on_point_removed(to_remove):
 	if score > 0:
 		score -= to_remove
 		if score % points_to_progress == 0:
 			pass
 	update_score_label()
+
+func spawn_carrot():
+	var screen_size = get_viewport().get_visible_rect().size
+	var rand = RandomNumberGenerator.new()
+	# Spawn carrot at random position along x axis
+	var carrot = carrot_scene.instantiate()
+	rand.randomize()
+	var x = rand.randf_range(0, screen_size.x)
+	carrot.position.x = x
+	add_child(carrot)
 	
 func update_score_label():
-	scoreLabel.text = "Score: " + str(score)
+	score_label.text = "Score: " + str(score)
 	

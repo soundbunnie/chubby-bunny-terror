@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="chubby bunny terror"
-run/main_scene="res://levels/CatchLevel.tscn"
+run/main_scene="res://levels/catch_level.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
-SignalBus="*res://scripts/managers/SignalBus.gd"
+SignalBus="*res://scripts/managers/signal_bus.gd"
 
 [dotnet]
 

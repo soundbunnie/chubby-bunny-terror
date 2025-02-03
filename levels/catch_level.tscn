@@ -1,42 +1,42 @@
 [gd_scene load_steps=12 format=3 uid="uid://diqiujq5mok75"]
 
-[ext_resource type="Script" path="res://scripts/level_scripts/catch_level.gd" id="1_36e2h"]
-[ext_resource type="Script" path="res://scripts/managers/AudioManager.gd" id="2_x0mfm"]
-[ext_resource type="AudioStream" uid="uid://cipqmujd2yyta" path="res://assets/music/shop theme wip.wav" id="3_td0up"]
-[ext_resource type="AudioStream" uid="uid://dd7wsj0ftmue0" path="res://assets/music/Theme of Miranda.wav" id="4_3ge28"]
-[ext_resource type="Script" path="res://scripts/managers/MusicManager.gd" id="5_1s0b2"]
-[ext_resource type="Script" path="res://scripts/managers/SignalBus.gd" id="6_0tf6j"]
-[ext_resource type="PackedScene" uid="uid://h42kpwgjctfp" path="res://player.tscn" id="7_ct00i"]
-[ext_resource type="PackedScene" uid="uid://qxfxh4kge7l4" path="res://carrot.tscn" id="8_of2sv"]
-[ext_resource type="Script" path="res://scripts/UI/UI.gd" id="9_qm4ih"]
-[ext_resource type="Script" path="res://scripts/UI/PauseScreen.gd" id="10_hise0"]
+[ext_resource type="Script" path="res://scripts/level_scripts/catch_level.gd" id="1_y0o8j"]
+[ext_resource type="Script" path="res://scripts/managers/audio_manager.gd" id="2_pigff"]
+[ext_resource type="AudioStream" uid="uid://cipqmujd2yyta" path="res://assets/music/shop theme wip.wav" id="3_kq7y2"]
+[ext_resource type="AudioStream" uid="uid://dd7wsj0ftmue0" path="res://assets/music/Theme of Miranda.wav" id="4_ttcim"]
+[ext_resource type="Script" path="res://scripts/managers/music_manager.gd" id="5_wcxb1"]
+[ext_resource type="Script" path="res://scripts/managers/signal_bus.gd" id="6_28tyf"]
+[ext_resource type="PackedScene" uid="uid://h42kpwgjctfp" path="res://player.tscn" id="7_qmpxd"]
+[ext_resource type="PackedScene" uid="uid://qxfxh4kge7l4" path="res://carrot.tscn" id="8_bd4dh"]
+[ext_resource type="Script" path="res://scripts/UI/UI.gd" id="9_221so"]
+[ext_resource type="Script" path="res://scripts/UI/pause_screen.gd" id="10_nooal"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_488cs"]
 size = Vector2(1144, 26)
 
 [node name="CatchLevel" type="Node2D"]
-script = ExtResource("1_36e2h")
+script = ExtResource("1_y0o8j")
 
 [node name="AudioManager" type="Node" parent="."]
 process_mode = 3
-script = ExtResource("2_x0mfm")
-music_array = Array[Resource]([ExtResource("3_td0up"), ExtResource("4_3ge28")])
+script = ExtResource("2_pigff")
+music_array = Array[Resource]([ExtResource("3_kq7y2"), ExtResource("4_ttcim")])
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="AudioManager"]
 
 [node name="MusicManager" type="Node" parent="."]
 process_mode = 3
-script = ExtResource("5_1s0b2")
+script = ExtResource("5_wcxb1")
 
 [node name="SignalBus" type="Node" parent="."]
-script = ExtResource("6_0tf6j")
+script = ExtResource("6_28tyf")
 
-[node name="Player" parent="." instance=ExtResource("7_ct00i")]
+[node name="Player" parent="." instance=ExtResource("7_qmpxd")]
 position = Vector2(553, 567)
 
 [node name="CarrotSpawnTimer" type="Timer" parent="."]
 
-[node name="Carrot" parent="." instance=ExtResource("8_of2sv")]
+[node name="Carrot" parent="." instance=ExtResource("8_bd4dh")]
 position = Vector2(222, 84)
 
 [node name="Floor" type="StaticBody2D" parent="." groups=["Floor"]]
@@ -51,7 +51,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("9_qm4ih")
+script = ExtResource("9_221so")
 metadata/_edit_use_anchors_ = true
 
 [node name="ScoreLabel" type="Label" parent="UI"]
@@ -66,7 +66,7 @@ metadata/_edit_use_anchors_ = true
 [node name="PauseScreen" type="CanvasLayer" parent="UI"]
 process_mode = 2
 visible = false
-script = ExtResource("10_hise0")
+script = ExtResource("10_nooal")
 
 [node name="PauseMenu" type="ColorRect" parent="UI/PauseScreen"]
 offset_left = 402.0
