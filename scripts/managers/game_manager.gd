@@ -1,6 +1,5 @@
 extends Node
 
-
 func _ready():
 	# connect signals
 	SignalBus.pause_game.connect(_on_game_paused)
@@ -15,7 +14,7 @@ func _unhandled_input(event):
 	
 func _notification(what):
 	match what:
-		NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+		NOTIFICATION_WM_WINDOW_FOCUS_OUT: # pause game if alt tabbed
 			if !Globals.paused:
 				SignalBus.pause_game.emit()
 

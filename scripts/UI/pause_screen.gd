@@ -14,7 +14,7 @@ var quit_confirm:bool = false
 func _ready():
 	SignalBus.pause_game.connect(_on_game_paused)
 	SignalBus.unpause_game.connect(_on_game_unpaused)
-	LineEditRegEx.compile("^[0-9.]*$")
+	LineEditRegEx.compile("^[0-9.]*$") # this is the pattern that makes the slider input only accept numbers
 	volume_input.placeholder_text = (str(volume_slider.value))
 
 func _on_game_paused():
@@ -34,7 +34,14 @@ func _on_quit_pressed():
 		quit_confirm = true
 	elif quit_confirm:
 		get_tree().quit()
+		
+func _on_volume_slider_value_changed(value):
+	SignalBus.change_volume.emit(value)
+	volume_input.placeholder_text = (str(volume_slider.value))
 
+# THESE TWO FUNCTIONS
+# ARE BROKEN
+# IDK WHY, WILL FIX LATER
 func _on_volume_input_text_submitted(_new_text):
 	volume_input.release_focus()
 	volume_input.text = ""
@@ -47,8 +54,3 @@ func _on_volume_input_text_changed(new_text):
 	else:
 		volume_input.text = old_text
 		volume_input.set_caret_column(volume_input.text.length())
-
-func _on_volume_slider_value_changed(value):
-	SignalBus.change_volume.emit(value)
-	volume_input.placeholder_text = (str(volume_slider.value))
-	

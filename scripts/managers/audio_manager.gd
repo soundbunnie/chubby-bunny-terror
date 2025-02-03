@@ -31,16 +31,18 @@ func _on_music_changed(mus_name):
 	change_music(mus_name)
 	
 func change_music(mus_name):
+	# sorts through all music in array to find mus_name then plays the song once it's found
 	for i in music_array.size():
 		var song = music_array[i]
 		var song_arr_name = song.resource_path.get_file().get_basename()
 		if song_arr_name == mus_name:
 			current_song = song_arr_name
 			music_player.stream = song
-			music_player.play(paused_position)
+			music_player.play(paused_position) # paused_position shouldn't change unless music is paused or resumed
 			paused_position = 0.0
 
 func _on_volume_changed(num):
+	# linear_to_db conversion makes the new volume sound more like what you would think
 	music_player.volume_db = linear_to_db(num)
 
 func pause_music():
@@ -48,6 +50,7 @@ func pause_music():
 	music_player.stop()
 
 func play_pause_music():
+	# sort through music_array and play pause menu song
 	for i in music_array.size():
 		var song = music_array[i]
 		var song_arr_name = song.resource_path.get_file().get_basename()

@@ -30,7 +30,7 @@ func _on_timer_timeout():
 
 func _on_point_added(to_add):
 	score += to_add
-	if score % points_to_progress == 0:
+	if score % points_to_progress == 0: # basically checks if score is a multiple of the number of points to progress
 		pass
 	update_score_label()
 	
