@@ -4,12 +4,10 @@ extends Node2D
 @onready var scoreLabel = $UI/ScoreLabel
 @onready var pauseScreen = $UI/PauseScreen
 
-@export var spawnInterval:float = 0.5
+@export var spawnInterval:float = 0.3
 @export var points_to_progress:int = 10
 
 var paused:bool = false
-
-var speedMultiplierText:int = 1
 
 var carrotScene = load("res://carrot.tscn")
 
@@ -21,7 +19,7 @@ func _ready():
 	SignalBus.remove_point.connect(_on_remove_point)
 	SignalBus.pause_game.connect(pause_main)
 	SignalBus.unpause_game.connect(unpause_main)
-	update_timer(0, "adding")
+	spawnTimer.wait_time = spawnInterval
 	spawnTimer.start()
 	
 func _notification(what):
@@ -72,14 +70,3 @@ func _on_remove_point(to_remove):
 func update_score_label():
 	scoreLabel.text = "Score: " + str(score)
 	
-func update_timer(time_to_change, modifier):
-	if modifier == "adding":
-		spawnInterval = spawnInterval + (spawnInterval * time_to_change)
-		speedMultiplierText = speedMultiplierText + (spawnInterval * time_to_change)
-	elif modifier == "removing":
-		spawnInterval = spawnInterval - (spawnInterval * time_to_change)
-		speedMultiplierText = speedMultiplierText - (spawnInterval * time_to_change)
-		
-	spawnInterval = snapped(spawnInterval, 0.01)
-	speedMultiplierText = snapped(speedMultiplierText, 0.01)
-	spawnTimer.wait_time = spawnInterval
