@@ -1,9 +1,13 @@
 extends CharacterBody2D
 
-@onready var animated_sprite = $AnimatedSprite2D
+# @export variables
 @export var move_speed:float = 0.6
 
+# private variables
 var mouse_pos:Vector2
+
+# @onready variables
+@onready var animated_sprite = $AnimatedSprite2D
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
