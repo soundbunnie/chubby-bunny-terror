@@ -1,4 +1,4 @@
-extends Node2D
+extends BaseLevel
 
 # @export variables
 @export var spawn_interval:float = 0.3
@@ -21,31 +21,10 @@ func _ready():
 	spawn_timer.timeout.connect(_on_timer_timeout)
 	SignalBus.add_point.connect(_on_point_added)
 	SignalBus.remove_point.connect(_on_point_removed)
-	SignalBus.pause_game.connect(_on_game_paused)
-	SignalBus.unpause_game.connect(_on_game_unpaused)
-	
 	spawn_timer.wait_time = spawn_interval
 	spawn_timer.start()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-func _notification(what):
-	match what:
-		NOTIFICATION_WM_WINDOW_FOCUS_OUT:
-			SignalBus.pause_game.emit()
-		NOTIFICATION_WM_WINDOW_FOCUS_IN:
-			SignalBus.unpause_game.emit()
-			
-func _on_game_paused():
-	SignalBus.pause_music.emit()
-	get_tree().paused = true
-	paused = true
-	
-func _on_game_unpaused():
-	if !pause_screen.visible:
-		print("pause screen not visible")
-		SignalBus.unpause_music.emit()
-		get_tree().paused = false
-		paused = false
-		
 func _on_timer_timeout():
 	spawn_carrot()
 
@@ -74,4 +53,3 @@ func spawn_carrot():
 	
 func update_score_label():
 	score_label.text = "Score: " + str(score)
-	

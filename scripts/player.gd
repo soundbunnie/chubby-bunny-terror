@@ -10,7 +10,6 @@ var mouse_pos:Vector2
 @onready var animated_sprite = $AnimatedSprite2D
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	process_mode = Node.PROCESS_MODE_INHERIT
 	SignalBus.add_point.connect(eat_carrot.unbind(1))
 	

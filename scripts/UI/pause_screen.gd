@@ -12,11 +12,21 @@ var quit_confirm:bool = false
 @onready var LineEditRegEx := RegEx.new()
 
 func _ready():
+	SignalBus.pause_game.connect(_on_game_paused)
+	SignalBus.unpause_game.connect(_on_game_unpaused)
 	LineEditRegEx.compile("^[0-9.]*$")
 	volume_input.placeholder_text = (str(volume_slider.value))
 
+func _on_game_paused():
+	show()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+func _on_game_unpaused():
+	hide()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
 func _on_resume_pressed():
-	pause()
+	SignalBus.unpause_game.emit()
 
 func _on_quit_pressed():
 	if !quit_confirm:
@@ -41,15 +51,4 @@ func _on_volume_input_text_changed(new_text):
 func _on_volume_slider_value_changed(value):
 	SignalBus.change_volume.emit(value)
 	volume_input.placeholder_text = (str(volume_slider.value))
-
-func pause():
-	if !paused:
-		paused = true
-		show()
-		SignalBus.pause_game.emit()
-	elif paused:
-		paused = false
-		quit_confirm = false
-		quit_button.set_text("Quit")
-		hide()
-		SignalBus.unpause_game.emit()
+	
