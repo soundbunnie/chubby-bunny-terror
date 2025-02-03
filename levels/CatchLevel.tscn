@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://diqiujq5mok75"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_leax8"]
+[ext_resource type="Script" path="res://scripts/level_scripts/catch_level.gd" id="1_36e2h"]
 [ext_resource type="Script" path="res://scripts/managers/AudioManager.gd" id="2_x0mfm"]
 [ext_resource type="AudioStream" uid="uid://cipqmujd2yyta" path="res://assets/music/shop theme wip.wav" id="3_td0up"]
 [ext_resource type="AudioStream" uid="uid://dd7wsj0ftmue0" path="res://assets/music/Theme of Miranda.wav" id="4_3ge28"]
@@ -15,7 +15,7 @@
 size = Vector2(1144, 26)
 
 [node name="CatchLevel" type="Node2D"]
-script = ExtResource("1_leax8")
+script = ExtResource("1_36e2h")
 
 [node name="AudioManager" type="Node" parent="."]
 process_mode = 3
