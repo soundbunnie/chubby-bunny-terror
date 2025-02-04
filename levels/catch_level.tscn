@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://diqiujq5mok75"]
+[gd_scene load_steps=16 format=3 uid="uid://diqiujq5mok75"]
 
 [ext_resource type="Script" path="res://scripts/level_scripts/catch_level.gd" id="1_y0o8j"]
 [ext_resource type="Script" path="res://scripts/globals.gd" id="2_ckwmq"]
+[ext_resource type="Script" path="res://addons/midi/MidiPlayer.gd" id="2_jcpu0"]
 [ext_resource type="Script" path="res://scripts/managers/audio_manager.gd" id="2_pigff"]
 [ext_resource type="AudioStream" uid="uid://cipqmujd2yyta" path="res://assets/music/shop theme wip.wav" id="3_kq7y2"]
+[ext_resource type="Script" path="res://levels/Conductor.gd" id="3_sbtwb"]
 [ext_resource type="AudioStream" uid="uid://dd7wsj0ftmue0" path="res://assets/music/Theme of Miranda.wav" id="4_ttcim"]
 [ext_resource type="Script" path="res://scripts/managers/music_manager.gd" id="5_wcxb1"]
 [ext_resource type="Script" path="res://scripts/managers/game_manager.gd" id="6_3ger0"]
@@ -18,6 +20,15 @@ size = Vector2(1144, 26)
 
 [node name="CatchLevel" type="Node2D"]
 script = ExtResource("1_y0o8j")
+
+[node name="MidiPlayer" type="Node" parent="."]
+script = ExtResource("2_jcpu0")
+file = "res://assets/test_midi.MID"
+soundfont = "res://assets/music/Nice-Steinway-Lite-v3.0.sf2"
+
+[node name="Conductor" type="Node" parent="." node_paths=PackedStringArray("midi_player")]
+script = ExtResource("3_sbtwb")
+midi_player = NodePath("../MidiPlayer")
 
 [node name="Globals" type="Node" parent="."]
 process_mode = 3
@@ -47,7 +58,7 @@ position = Vector2(553, 567)
 [node name="CarrotSpawnTimer" type="Timer" parent="."]
 
 [node name="Carrot" parent="." instance=ExtResource("8_bd4dh")]
-position = Vector2(222, 84)
+position = Vector2(101, 721)
 
 [node name="Floor" type="StaticBody2D" parent="." groups=["Floor"]]
 
@@ -160,7 +171,7 @@ offset_right = 225.0
 offset_bottom = 372.0
 text = "Quit"
 
-[connection signal="add_point" from="SignalBus" to="." method="_on_signal_bus_add_point" unbinds=1]
+[connection signal="midi_event" from="MidiPlayer" to="Conductor" method="_on_midi_player_midi_event"]
 [connection signal="pressed" from="UI/PauseScreen/PauseMenu/Resume" to="UI/PauseScreen" method="_on_resume_pressed"]
 [connection signal="value_changed" from="UI/PauseScreen/PauseMenu/VolumeSlider" to="UI/PauseScreen" method="_on_volume_slider_value_changed"]
 [connection signal="text_changed" from="UI/PauseScreen/PauseMenu/VolumeSlider/VolumeInput" to="UI/PauseScreen" method="_on_volume_input_text_changed"]

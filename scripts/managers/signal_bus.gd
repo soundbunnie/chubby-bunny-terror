@@ -15,3 +15,5 @@ signal unpause_music
 signal change_music(path)
 
 signal change_volume(num)
+
+signal spawn_carrot

@@ -18,16 +18,13 @@ var score:int = 0
 
 func _ready():
 	# connecting signals
-	spawn_timer.timeout.connect(_on_timer_timeout)
 	SignalBus.add_point.connect(_on_point_added)
 	SignalBus.remove_point.connect(_on_point_removed)
+	SignalBus.spawn_carrot.connect(spawn_carrot)
 	spawn_timer.wait_time = spawn_interval
 	spawn_timer.start()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-func _on_timer_timeout():
-	spawn_carrot()
-
 func _on_point_added(to_add):
 	score += to_add
 	if score % points_to_progress == 0: # basically checks if score is a multiple of the number of points to progress

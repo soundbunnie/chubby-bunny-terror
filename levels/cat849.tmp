@@ -1,0 +1,177 @@
+[gd_scene load_steps=16 format=3 uid="uid://diqiujq5mok75"]
+
+[ext_resource type="Script" path="res://scripts/level_scripts/catch_level.gd" id="1_y0o8j"]
+[ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="2_by7du"]
+[ext_resource type="Script" path="res://scripts/globals.gd" id="2_ckwmq"]
+[ext_resource type="Script" path="res://scripts/managers/audio_manager.gd" id="2_pigff"]
+[ext_resource type="AudioStream" uid="uid://cipqmujd2yyta" path="res://assets/music/shop theme wip.wav" id="3_kq7y2"]
+[ext_resource type="Script" path="res://levels/Conductor.gd" id="3_sbtwb"]
+[ext_resource type="AudioStream" uid="uid://dd7wsj0ftmue0" path="res://assets/music/Theme of Miranda.wav" id="4_ttcim"]
+[ext_resource type="Script" path="res://scripts/managers/music_manager.gd" id="5_wcxb1"]
+[ext_resource type="Script" path="res://scripts/managers/game_manager.gd" id="6_3ger0"]
+[ext_resource type="Script" path="res://scripts/managers/signal_bus.gd" id="6_28tyf"]
+[ext_resource type="PackedScene" uid="uid://h42kpwgjctfp" path="res://player.tscn" id="7_qmpxd"]
+[ext_resource type="PackedScene" uid="uid://qxfxh4kge7l4" path="res://carrot.tscn" id="8_bd4dh"]
+[ext_resource type="Script" path="res://scripts/UI/UI.gd" id="9_221so"]
+[ext_resource type="Script" path="res://scripts/UI/pause_screen.gd" id="10_nooal"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_488cs"]
+size = Vector2(1144, 26)
+
+[node name="CatchLevel" type="Node2D"]
+script = ExtResource("1_y0o8j")
+
+[node name="MidiPlayer" parent="." instance=ExtResource("2_by7du")]
+file = "res://assets/music/Wii Channels - Mii Channel.mid"
+
+[node name="Conductor" type="Node" parent="." node_paths=PackedStringArray("midi_player")]
+script = ExtResource("3_sbtwb")
+midi_player = NodePath("../MidiPlayer")
+
+[node name="Globals" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_ckwmq")
+
+[node name="AudioManager" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_pigff")
+music_array = Array[Resource]([ExtResource("3_kq7y2"), ExtResource("4_ttcim")])
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+
+[node name="MusicManager" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("5_wcxb1")
+
+[node name="GameManager" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("6_3ger0")
+
+[node name="SignalBus" type="Node" parent="."]
+script = ExtResource("6_28tyf")
+
+[node name="Player" parent="." instance=ExtResource("7_qmpxd")]
+position = Vector2(553, 567)
+
+[node name="CarrotSpawnTimer" type="Timer" parent="."]
+
+[node name="Carrot" parent="." instance=ExtResource("8_bd4dh")]
+position = Vector2(222, 84)
+
+[node name="Floor" type="StaticBody2D" parent="." groups=["Floor"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(576, 634)
+shape = SubResource("RectangleShape2D_488cs")
+
+[node name="UI" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_221so")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 193.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Score: 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseScreen" type="CanvasLayer" parent="UI"]
+process_mode = 2
+visible = false
+script = ExtResource("10_nooal")
+
+[node name="PauseMenu" type="ColorRect" parent="UI/PauseScreen"]
+offset_left = 402.0
+offset_top = 79.0
+offset_right = 728.0
+offset_bottom = 474.0
+color = Color(1, 0.858824, 1, 1)
+
+[node name="Resume" type="Button" parent="UI/PauseScreen/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -62.5
+offset_right = 92.0
+offset_bottom = -27.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+
+[node name="Save" type="Button" parent="UI/PauseScreen/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = 2.5
+offset_right = 91.0
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Save"
+
+[node name="VolumeSlider" type="HSlider" parent="UI/PauseScreen/PauseMenu"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 33.0
+offset_right = 265.0
+offset_bottom = 83.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="VolumeLabel" type="Label" parent="UI/PauseScreen/PauseMenu/VolumeSlider"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -55.0
+offset_right = 63.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeInput" type="LineEdit" parent="UI/PauseScreen/PauseMenu/VolumeSlider"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 42.0
+offset_right = 132.063
+offset_bottom = 73.0
+alignment = 1
+max_length = 3
+
+[node name="Quit" type="Button" parent="UI/PauseScreen/PauseMenu"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 337.0
+offset_right = 225.0
+offset_bottom = 372.0
+text = "Quit"
+
+[connection signal="add_point" from="SignalBus" to="." method="_on_signal_bus_add_point" unbinds=1]
+[connection signal="pressed" from="UI/PauseScreen/PauseMenu/Resume" to="UI/PauseScreen" method="_on_resume_pressed"]
+[connection signal="value_changed" from="UI/PauseScreen/PauseMenu/VolumeSlider" to="UI/PauseScreen" method="_on_volume_slider_value_changed"]
+[connection signal="text_changed" from="UI/PauseScreen/PauseMenu/VolumeSlider/VolumeInput" to="UI/PauseScreen" method="_on_volume_input_text_changed"]
+[connection signal="text_submitted" from="UI/PauseScreen/PauseMenu/VolumeSlider/VolumeInput" to="UI/PauseScreen" method="_on_volume_input_text_submitted"]
+[connection signal="pressed" from="UI/PauseScreen/PauseMenu/Quit" to="UI/PauseScreen" method="_on_quit_pressed"]
