@@ -18,12 +18,27 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_488cs"]
 size = Vector2(1144, 26)
 
-[node name="CatchLevel" type="Node2D"]
+[node name="CatchLevel" type="Node2D" node_paths=PackedStringArray("lanes")]
 script = ExtResource("1_y0o8j")
+lanes = [NodePath("Lanes/Lane"), NodePath("Lanes/Lane2"), NodePath("Lanes/Lane3"), NodePath("Lanes/Lane4")]
+
+[node name="Lanes" type="Node" parent="."]
+
+[node name="Lane" type="Node2D" parent="Lanes"]
+position = Vector2(217, 35)
+
+[node name="Lane2" type="Node2D" parent="Lanes"]
+position = Vector2(359, 31)
+
+[node name="Lane3" type="Node2D" parent="Lanes"]
+position = Vector2(563, 30)
+
+[node name="Lane4" type="Node2D" parent="Lanes"]
+position = Vector2(997, 33)
 
 [node name="MidiPlayer" type="Node" parent="."]
 script = ExtResource("2_jcpu0")
-file = "res://assets/test_midi.MID"
+file = "res://assets/music/test_midi.MID"
 soundfont = "res://assets/music/Nice-Steinway-Lite-v3.0.sf2"
 
 [node name="Conductor" type="Node" parent="." node_paths=PackedStringArray("midi_player")]

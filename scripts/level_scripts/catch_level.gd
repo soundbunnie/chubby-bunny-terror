@@ -3,6 +3,7 @@ extends BaseLevel
 # @export variables
 @export var spawn_interval:float = 0.3
 @export var points_to_progress:int = 10
+@export var lanes:Array[Node2D]
 
 # reference variables
 var carrot_scene = load("res://carrot.tscn")
@@ -20,7 +21,7 @@ func _ready():
 	# connecting signals
 	SignalBus.add_point.connect(_on_point_added)
 	SignalBus.remove_point.connect(_on_point_removed)
-	SignalBus.spawn_carrot.connect(spawn_carrot)
+	SignalBus.note_played.connect(spawn_carrot)
 	spawn_timer.wait_time = spawn_interval
 	spawn_timer.start()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -38,15 +39,14 @@ func _on_point_removed(to_remove):
 			pass
 	update_score_label()
 
-func spawn_carrot():
-	var screen_size = get_viewport().get_visible_rect().size
-	var rand = RandomNumberGenerator.new()
-	# Spawn carrot at random position along x axis
-	var carrot = carrot_scene.instantiate()
-	rand.randomize()
-	var x = rand.randf_range(0, screen_size.x)
-	carrot.position.x = x
-	add_child(carrot)
+func spawn_carrot(note, vel):
+	if note > lanes.size() - 1:
+		print("Note out of range: ", note)
+	else:
+		var lane = lanes[note]
+		var carrot = carrot_scene.instantiate()
+		carrot.position.x = lane.position.x
+		add_child(carrot)
 	
 func update_score_label():
 	score_label.text = "Score: " + str(score)

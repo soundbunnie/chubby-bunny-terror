@@ -16,4 +16,4 @@ signal change_music(path)
 
 signal change_volume(num)
 
-signal spawn_carrot
+signal note_played(note, velocity)
