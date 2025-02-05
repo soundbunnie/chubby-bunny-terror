@@ -13,7 +13,6 @@ var paused:bool = false
 var score:int = 0
 
 # @onready variables
-@onready var spawn_timer = $CarrotSpawnTimer
 @onready var score_label = $UI/ScoreLabel
 @onready var pause_screen = $UI/PauseScreen
 
@@ -22,9 +21,7 @@ func _ready():
 	SignalBus.add_point.connect(_on_point_added)
 	SignalBus.remove_point.connect(_on_point_removed)
 	SignalBus.note_played.connect(spawn_carrot)
-	spawn_timer.wait_time = spawn_interval
-	spawn_timer.start()
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # locks cursor to screen and hides it
 	
 func _on_point_added(to_add):
 	score += to_add
@@ -40,13 +37,19 @@ func _on_point_removed(to_remove):
 	update_score_label()
 
 func spawn_carrot(note, vel):
+	# spawns note in related lane
+	# if note value is 0, it will spawn in index 0 of array (first element in this case)
+	# REMINDER: array starts at 0!! if you put the note value as 4, it will actually spawn in the fifth lane
+	# velocity will be a flex variable, in this catch level, it could be spawning a different object, in schmup
+	# level, could be spawning a different mob type
+	# print(note)
 	if note > lanes.size() - 1:
-		print("Note out of range: ", note)
+		print("Note out of range: ", note) # throws an error message if there isn't a track for the note
 	else:
 		var lane = lanes[note]
-		var carrot = carrot_scene.instantiate()
+		var carrot = carrot_scene.instantiate()  # creates instance of carrot scene (basically a copy of the carrot)
 		carrot.position.x = lane.position.x
-		add_child(carrot)
+		add_child(carrot) # this adds it to the actual scene tree
 	
 func update_score_label():
 	score_label.text = "Score: " + str(score)

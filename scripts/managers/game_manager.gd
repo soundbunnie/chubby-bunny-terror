@@ -1,4 +1,5 @@
 extends Node
+# GameManager will keep track of functionality related to handling the actual game (pausing, saving, etc)
 
 func _ready():
 	# connect signals

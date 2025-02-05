@@ -20,21 +20,27 @@ size = Vector2(1144, 26)
 
 [node name="CatchLevel" type="Node2D" node_paths=PackedStringArray("lanes")]
 script = ExtResource("1_y0o8j")
-lanes = [NodePath("Lanes/Lane"), NodePath("Lanes/Lane2"), NodePath("Lanes/Lane3"), NodePath("Lanes/Lane4")]
+lanes = [NodePath("Lanes/Lane"), NodePath("Lanes/Lane2"), NodePath("Lanes/Lane3"), NodePath("Lanes/Lane4"), NodePath("Lanes/Lane5"), NodePath("Lanes/Lane6")]
 
 [node name="Lanes" type="Node" parent="."]
 
 [node name="Lane" type="Node2D" parent="Lanes"]
-position = Vector2(217, 35)
+position = Vector2(178, 34)
 
 [node name="Lane2" type="Node2D" parent="Lanes"]
-position = Vector2(359, 31)
+position = Vector2(319, 37)
 
 [node name="Lane3" type="Node2D" parent="Lanes"]
-position = Vector2(563, 30)
+position = Vector2(477, 37)
 
 [node name="Lane4" type="Node2D" parent="Lanes"]
-position = Vector2(997, 33)
+position = Vector2(687, 38)
+
+[node name="Lane5" type="Node2D" parent="Lanes"]
+position = Vector2(884, 41)
+
+[node name="Lane6" type="Node2D" parent="Lanes"]
+position = Vector2(1067, 41)
 
 [node name="MidiPlayer" type="Node" parent="."]
 script = ExtResource("2_jcpu0")
@@ -70,8 +76,6 @@ script = ExtResource("6_28tyf")
 [node name="Player" parent="." instance=ExtResource("7_qmpxd")]
 position = Vector2(553, 567)
 
-[node name="CarrotSpawnTimer" type="Timer" parent="."]
-
 [node name="Carrot" parent="." instance=ExtResource("8_bd4dh")]
 position = Vector2(101, 721)
 
@@ -91,7 +95,12 @@ script = ExtResource("9_221so")
 metadata/_edit_use_anchors_ = true
 
 [node name="ScoreLabel" type="Label" parent="UI"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = -0.025
+anchor_right = 0.025
+anchor_bottom = -0.025
 offset_right = 193.0
 offset_bottom = 48.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
