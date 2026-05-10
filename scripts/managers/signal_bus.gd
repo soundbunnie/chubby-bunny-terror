@@ -17,3 +17,5 @@ signal change_music(path)
 signal change_volume(num)
 
 signal note_played(note, velocity)
+
+signal create_midi_timer(time)

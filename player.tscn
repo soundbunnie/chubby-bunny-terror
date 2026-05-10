@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://h42kpwgjctfp"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_rehct"]
+[ext_resource type="Script" uid="uid://c6uhtskugfbh5" path="res://scripts/player.gd" id="1_rehct"]
 [ext_resource type="Texture2D" uid="uid://bqyfrxh5w1bwk" path="res://assets/sprites/player/bunny_idle_transparent.png" id="2_1p81v"]
 [ext_resource type="Texture2D" uid="uid://dt1bvgmrxx8p3" path="res://assets/sprites/player/bunny_eat_transparent.png" id="3_lga81"]
 

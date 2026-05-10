@@ -12,7 +12,7 @@ config_version=5
 
 config/name="chubby bunny terror"
 run/main_scene="res://levels/catch_level.tscn"
-config/features=PackedStringArray("4.3", "Mobile")
+config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]

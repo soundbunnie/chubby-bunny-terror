@@ -8,3 +8,4 @@ func _ready() -> void:
 func _on_midi_player_midi_event(channel: Variant, event: Variant) -> void:
 	if event.type == SMF.MIDIEventType.note_on: 
 		SignalBus.note_played.emit(event.note, event.velocity)
+	
